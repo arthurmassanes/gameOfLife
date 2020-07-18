@@ -5,7 +5,11 @@
 ** main
 */
 
+#include "Board.hpp"
+
 int main(void)
 {
+    Board b;
+
     return 0;
 }
