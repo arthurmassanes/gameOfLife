@@ -29,8 +29,8 @@ bool Board::loadFromFile(std::string fileName)
 {
     std::ifstream file(fileName);
     std::string line;
-    int y = 0;
-    int x = 0;
+    unsigned int y = 0;
+    unsigned int x = 0;
 
     if (!file) {
         std::cerr << "Could not read file '" << fileName << "'\n";
@@ -39,10 +39,15 @@ bool Board::loadFromFile(std::string fileName)
     while (std::getline(file, line)) {
         x = 0;
         for (const char &c: line) {
-            _map[y][x] = c;
+            if (x >= _map[y].length())
+                _map[y] += c;
+            else
+                _map[y][x] = c;
             x++;
         }
         y++;
+        if (y >= _map.size())
+            _map.push_back(std::string());
     }
     return (true);
 }

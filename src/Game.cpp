@@ -12,7 +12,6 @@ Game::Game(sf::RenderWindow *window)
     _window = window;
     if (!_board.loadFromFile(DEFAULT_MAP))
         throw Error("Cannot build board", "Game::Game");
-    _board.dump();
 }
 
 void Game::pollEvent(void)
