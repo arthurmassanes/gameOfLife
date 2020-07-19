@@ -31,11 +31,16 @@ void Game::pollEvent(void)
 
 void Game::run(void)
 {
+    std::cout << _board.getNbNeighbors(sf::Vector2f(0, 0)) << "\n";
     while (_window->isOpen()) {
         _window->clear(sf::Color::White);
         this->pollEvent();
         _board.draw(_window);
         _window->display();
-        _board.evolve();
+        try {
+            _board.evolve();
+        } catch (const Error &e) {
+            e.printErr();
+        }
     }
 }

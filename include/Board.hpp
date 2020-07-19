@@ -47,6 +47,7 @@ public:
     // This one needs a y parameter
     // since some lines are longer than others
     int getWidth(int y) const;
+    bool isInvalidPos(sf::Vector2f) const noexcept;
 };
 
 

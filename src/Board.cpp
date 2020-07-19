@@ -64,10 +64,22 @@ int Board::getWidth(int y) const
     return (_map[y].length());
 }
 
+bool Board::isInvalidPos(sf::Vector2f pos) const noexcept
+{
+    if (pos.x < 0 || pos.y < 0)
+        return (true);
+    else if (pos.y >= getHeight() || pos.x >= getWidth(pos.y))
+        return (true);
+    else
+        return (false);
+}
+
 bool Board::isCellAlive(sf::Vector2f pos)
 {
-    (void)pos;
-    return (true);
+    if (isInvalidPos(pos)) {
+        return (false);
+    }
+    return (_map[pos.y][pos.x] != DEAD_CELL);
 }
 
 void Board::draw(sf::RenderWindow *window)
@@ -110,8 +122,26 @@ void Board::toggleGridVisibility(void)
 
 int Board::getNbNeighbors(sf::Vector2f pos)
 {
-    (void)pos;
-    return (0);
+    int nb = 0;
+    std::vector<sf::Vector2f> neighbors = {
+        // top row
+        { .x = pos.x - 1, .y = pos.y - 1 },
+        { .x = pos.x, .y = pos.y - 1 },
+        { .x = pos.x + 1, .y = pos.y - 1 },
+
+        // cell row
+        { .x = pos.x - 1, .y = pos.y },
+        { .x = pos.x + 1, .y = pos.y },
+
+        // bottom row
+        { .x = pos.x - 1, .y = pos.y + 1 },
+        { .x = pos.x, .y = pos.y + 1 },
+        { .x = pos.x + 1, .y = pos.y + 1 },
+    };
+
+    for (const sf::Vector2f &pos: neighbors)
+        nb = isCellAlive(pos) ? nb + 1 : nb;
+    return (nb);
 }
 
 void Board::evolve(void)
@@ -120,10 +150,11 @@ void Board::evolve(void)
     int y = 0;
     int x = 0;
 
+    (void)x;
     for (std::string &row: _map) {
         x = 0;
         for (const char &cell: row) {
-
+            (void)cell;
         }
         y++;
     }
