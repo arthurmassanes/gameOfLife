@@ -84,11 +84,11 @@ bool Board::isCellAlive(sf::Vector2f pos) const
 
 void Board::animateColor(void)
 {
-    int off = _reverseColor ? -10 : 10;
+    int off = _reverseColor ? -5 : 5;
 
     if (_cellColor.r >= 250)
         _reverseColor = true;
-    else if (_cellColor.r <= 10)
+    else if (_cellColor.r <= 100)
         _reverseColor = false;
     _cellColor.r += off;
     _rect.setFillColor(_cellColor);
