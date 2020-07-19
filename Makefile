@@ -19,15 +19,19 @@ LD			=	$(CXX)
 PRINT		=	@echo -e
 RM          =   @rm -f
 
-override CPPFLAGS 	+=	-W -Wall -Werror -Wextra -std=c++11 -I./$(INCLUDE_PATH)
+LIB	= -lsfml-window -lsfml-system -lsfml-graphics
+
+override CPPFLAGS 	+=	-W -Wall -Werror -Wextra -std=c++11 -I./$(INCLUDE_PATH) -g3
 
 SRC		=	$(SRC_PATH)main.cpp	\
-			$(SRC_PATH)Board.cpp
+			$(SRC_PATH)Board.cpp	\
+			$(SRC_PATH)Game.cpp	\
+			$(SRC_PATH)Error.cpp	\
 
 OBJ 	= 	$(SRC:.cpp=.o)
 
 $(NAME): $(OBJ)
-	$(LD) $(OBJ) -o $(NAME) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
+	$(LD) $(LIB) $(OBJ) -o $(NAME) $(CPPFLAGS) $(LDFLAGS)
 
 all: $(NAME)
 

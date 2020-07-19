@@ -6,10 +6,17 @@
 */
 
 #include "Board.hpp"
+#include "Game.hpp"
 
 int main(void)
 {
-    Board b;
+    sf::RenderWindow window(sf::VideoMode(1000, 1000), NAME);
 
+    try {
+        Game g(&window);
+        g.run();
+    } catch (const Error &e) {
+        e.printErr();
+    }
     return 0;
 }

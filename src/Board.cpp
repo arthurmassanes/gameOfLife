@@ -2,7 +2,7 @@
 ** ARTHUR MASSANES PROJECT, 2020
 ** gameoflife
 ** File description:
-** main
+** board class
 */
 
 #include "Board.hpp"
@@ -23,8 +23,24 @@ void Board::dump(void)
     }
 }
 
-bool Board::loadFromFile(std::string file)
+bool Board::loadFromFile(std::string fileName)
 {
-    (void)file;
+    std::ifstream file(fileName);
+    std::string line;
+    int y = 0;
+    int x = 0;
+
+    if (!file) {
+        std::cerr << "Could not read file '" << fileName << "'\n";
+        return (false);
+    }
+    while (std::getline(file, line)) {
+        x = 0;
+        for (const char &c: line) {
+            _map[y][x] = c;
+            x++;
+        }
+        y++;
+    }
     return (true);
 }
