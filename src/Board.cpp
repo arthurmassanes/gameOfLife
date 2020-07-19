@@ -55,16 +55,37 @@ bool Board::loadFromFile(std::string fileName)
 void Board::draw(sf::RenderWindow *window)
 {
     sf::Vector2f pos = {0, 0};
+    sf::RectangleShape _grid;
 
+    _grid.setSize(sf::Vector2f(2, 2));
+    _grid.setFillColor(sf::Color::Red);
     for (const std::string &row: _map) {
-        pos.x = 0;
+         pos.x = 0;
         for (const char &c: row) {
-            if (c != ' ') {
+            if (c != DEAD_CELL) {
                 _rect.setPosition(pos);
                 window->draw(_rect);
             }
             pos.x += _cellSize;
+            _grid.setPosition(pos);
+            if (_isGridVisible)
+                window->draw(_grid);
         }
         pos.y += _cellSize;
     }
+}
+
+void Board::setGridVisibility(bool visible)
+{
+    _isGridVisible = visible;
+}
+
+bool Board::isGridVisible(void) const
+{
+    return (_isGridVisible);
+}
+
+void Board::toggleGridVisibility(void)
+{
+    _isGridVisible = !_isGridVisible;
 }
