@@ -18,15 +18,22 @@ Game::Game(sf::RenderWindow *window, std::string mapFile)
 void Game::pollEvent(void)
 {
     sf::Event event;
+    auto cellSize = _board.getCellSize();
 
     if (_keyboard.isKeyPressed(sf::Keyboard::Escape)) {
         _window->close();
         return;
     }
     if (_keyboard.isKeyPressed(sf::Keyboard::Up))
-        _board.setCellSize(_board.getCellSize() + 1);
+        _board.setCellSize(cellSize + 3);
     if (_keyboard.isKeyPressed(sf::Keyboard::Down))
-        _board.setCellSize(_board.getCellSize() - 1);
+        _board.setCellSize(cellSize - 3);
+    cellSize = _board.getCellSize();
+    if (_keyboard.isKeyPressed(sf::Keyboard::Left))
+        _board.setOffset(_board.getOffset() + cellSize);
+    if (_keyboard.isKeyPressed(sf::Keyboard::Right))
+        _board.setOffset(_board.getOffset() - cellSize);
+
     while (_window->pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             _window->close();

@@ -29,6 +29,7 @@ class Board
     bool _isGridVisible = true;
     sf::Color _cellColor = sf::Color::Blue;
     bool _reverseColor = false;
+    int _offset = 10;
 public:
     Board(void);
     void draw(sf::RenderWindow *);
@@ -57,6 +58,9 @@ public:
     bool isInvalidPos(sf::Vector2f) const noexcept;
     void setCellSize(int size);
     int getCellSize(void) const;
+    void setOffset(int);
+    int getOffset(void) const;
+
 };
 
 
