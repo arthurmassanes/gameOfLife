@@ -29,7 +29,7 @@ class Game
     sf::RenderWindow *_window;
     sf::Keyboard _keyboard;
 public:
-    Game(sf::RenderWindow *win);
+    Game(sf::RenderWindow *win, std::string mapFile);
     void run(void);
     void pollEvent(void);
 };

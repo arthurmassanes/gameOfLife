@@ -27,6 +27,8 @@ class Board
     std::vector<std::string> _map;
     sf::RectangleShape _rect;
     bool _isGridVisible = true;
+    sf::Color _cellColor = sf::Color::Blue;
+    bool _reverseColor = false;
 public:
     Board(void);
     void draw(sf::RenderWindow *);
@@ -36,6 +38,7 @@ public:
     // Board grid
     void setGridVisibility(bool);
     void toggleGridVisibility(void);
+    void animateColor(void);
 
     // Its evolving
     void evolve(void);

@@ -14,7 +14,7 @@ Board::Board(void)
         for (int x = 0; x < BOARD_SIZE; x++)
             _map[y] += " ";
     }
-    _rect.setFillColor(sf::Color::Blue);
+    _rect.setFillColor(_cellColor);
     _rect.setSize(sf::Vector2f(_cellSize, _cellSize));
 }
 
@@ -82,13 +82,26 @@ bool Board::isCellAlive(sf::Vector2f pos) const
     return (_map[pos.y][pos.x] != DEAD_CELL);
 }
 
+void Board::animateColor(void)
+{
+    int off = _reverseColor ? -10 : 10;
+
+    if (_cellColor.r >= 250)
+        _reverseColor = true;
+    else if (_cellColor.r <= 10)
+        _reverseColor = false;
+    _cellColor.r += off;
+    _rect.setFillColor(_cellColor);
+}
+
 void Board::draw(sf::RenderWindow *window)
 {
     sf::Vector2f pos = {0, 0};
     sf::RectangleShape _grid;
 
     _grid.setSize(sf::Vector2f(2, 2));
-    _grid.setFillColor(sf::Color::Red);
+    _grid.setFillColor(sf::Color::Black);
+    this->animateColor();
     for (const std::string &row: _map) {
          pos.x = 0;
         for (const char &c: row) {
