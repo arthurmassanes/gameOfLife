@@ -23,6 +23,10 @@ void Game::pollEvent(void)
         _window->close();
         return;
     }
+    if (_keyboard.isKeyPressed(sf::Keyboard::Up))
+        _board.setCellSize(_board.getCellSize() + 1);
+    if (_keyboard.isKeyPressed(sf::Keyboard::Down))
+        _board.setCellSize(_board.getCellSize() - 1);
     while (_window->pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             _window->close();

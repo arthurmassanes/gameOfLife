@@ -23,7 +23,7 @@
 
 class Board
 {
-    int _cellSize = 20;
+    int _cellSize = 10;
     std::vector<std::string> _map;
     sf::RectangleShape _rect;
     bool _isGridVisible = true;
@@ -55,6 +55,8 @@ public:
     // since some lines are longer than others
     int getWidth(int y) const;
     bool isInvalidPos(sf::Vector2f) const noexcept;
+    void setCellSize(int size);
+    int getCellSize(void) const;
 };
 
 

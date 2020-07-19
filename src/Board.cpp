@@ -209,3 +209,10 @@ void Board::evolve(void)
     }
     this->naturalSelection(newCells, toDie);
 }
+
+void Board::setCellSize(int size)
+{
+    _cellSize = size;
+    _rect.setSize(sf::Vector2f(size, size));
+}
+int Board::getCellSize(void) const { return (_cellSize); }
