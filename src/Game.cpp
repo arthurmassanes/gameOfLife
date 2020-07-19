@@ -12,6 +12,7 @@ Game::Game(sf::RenderWindow *window)
     _window = window;
     if (!_board.loadFromFile(DEFAULT_MAP))
         throw Error("Cannot build board", "Game::Game");
+    window->setFramerateLimit(FPS);
 }
 
 void Game::pollEvent(void)

@@ -18,6 +18,7 @@
 
 #define WIDTH 1000
 #define HEIGHT 1000
+#define FPS 15
 
 #define DEFAULT_MAP "maps/default.map"
 #define NAME "Game of Life"

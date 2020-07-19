@@ -14,7 +14,7 @@ Board::Board(void)
         for (int x = 0; x < BOARD_SIZE; x++)
             _map[y] += " ";
     }
-    _rect.setFillColor(sf::Color::Green);
+    _rect.setFillColor(sf::Color::Blue);
     _rect.setSize(sf::Vector2f(_cellSize, _cellSize));
 }
 
