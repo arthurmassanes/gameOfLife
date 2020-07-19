@@ -36,5 +36,6 @@ void Game::run(void)
         this->pollEvent();
         _board.draw(_window);
         _window->display();
+        _board.evolve();
     }
 }

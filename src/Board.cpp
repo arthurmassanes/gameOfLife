@@ -52,6 +52,24 @@ bool Board::loadFromFile(std::string fileName)
     return (true);
 }
 
+int Board::getHeight(void) const
+{
+    return (_map.size());
+}
+
+int Board::getWidth(int y) const
+{
+    if (y < 0 || (unsigned)y > _map.size())
+        throw Error("Column out of range", "Board::getWidth");
+    return (_map[y].length());
+}
+
+bool Board::isCellAlive(sf::Vector2f pos)
+{
+    (void)pos;
+    return (true);
+}
+
 void Board::draw(sf::RenderWindow *window)
 {
     sf::Vector2f pos = {0, 0};
@@ -88,4 +106,25 @@ bool Board::isGridVisible(void) const
 void Board::toggleGridVisibility(void)
 {
     _isGridVisible = !_isGridVisible;
+}
+
+int Board::getNbNeighbors(sf::Vector2f pos)
+{
+    (void)pos;
+    return (0);
+}
+
+void Board::evolve(void)
+{
+    std::vector<sf::Vector2f> newCells = {};
+    int y = 0;
+    int x = 0;
+
+    for (std::string &row: _map) {
+        x = 0;
+        for (const char &cell: row) {
+
+        }
+        y++;
+    }
 }

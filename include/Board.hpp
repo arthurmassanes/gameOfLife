@@ -15,6 +15,8 @@
 #include <iostream>
 #include <fstream>
 
+#include "Error.hpp"
+
 #define BOARD_SIZE 100
 #define DEAD_CELL ' '
 
@@ -32,8 +34,19 @@ public:
 
     // Board grid
     void setGridVisibility(bool);
-    bool isGridVisible(void) const;
     void toggleGridVisibility(void);
+
+    // Its evolving
+    void evolve(void);
+    int getNbNeighbors(sf::Vector2f);
+    bool isCellAlive(sf::Vector2f);
+
+    // Getters
+    bool isGridVisible(void) const;
+    int getHeight(void) const;
+    // This one needs a y parameter
+    // since some lines are longer than others
+    int getWidth(int y) const;
 };
 
 
