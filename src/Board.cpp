@@ -15,7 +15,7 @@ Board::Board(void)
             _map[y] += " ";
     }
     _rect.setFillColor(sf::Color::Green);
-    _rect.setSize(sf::Vector2f(50, 50));
+    _rect.setSize(sf::Vector2f(_cellSize, _cellSize));
 }
 
 void Board::dump(void)
@@ -58,8 +58,8 @@ void Board::draw(sf::RenderWindow *window)
                 _rect.setPosition(pos);
                 window->draw(_rect);
             }
-            pos.x += 50;
+            pos.x += _cellSize;
         }
-        pos.y += 50;
+        pos.y += _cellSize;
     }
 }

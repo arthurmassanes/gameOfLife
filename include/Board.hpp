@@ -15,11 +15,11 @@
 #include <iostream>
 #include <fstream>
 
-
 #define BOARD_SIZE 100
 
 class Board
 {
+    int _cellSize = 20;
     std::vector<std::string> _map;
     sf::RectangleShape _rect;
 public:
