@@ -1,3 +1,4 @@
+
 /*
 ** ARTHUR MASSANES PROJECT, 2020
 ** gameOfLife
@@ -10,19 +11,26 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 
 #include "Board.hpp"
 #include "Error.hpp"
 
+#define WIDTH 1000
+#define HEIGHT 1000
+
+#define DEFAULT_MAP "maps/default.map"
 #define NAME "Game of Life"
 
 class Game
 {
     Board _board;
     sf::RenderWindow *_window;
+    sf::Keyboard _keyboard;
 public:
     Game(sf::RenderWindow *win);
     void run(void);
+    void pollEvent(void);
 };
 
 

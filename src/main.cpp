@@ -10,9 +10,8 @@
 
 int main(void)
 {
-    sf::RenderWindow window(sf::VideoMode(1000, 1000), NAME);
-
     try {
+        sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), NAME);
         Game g(&window);
         g.run();
     } catch (const Error &e) {

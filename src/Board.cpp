@@ -14,6 +14,8 @@ Board::Board(void)
         for (int x = 0; x < BOARD_SIZE; x++)
             _map[y] += " ";
     }
+    _rect.setFillColor(sf::Color::Green);
+    _rect.setSize(sf::Vector2f(50, 50));
 }
 
 void Board::dump(void)
@@ -43,4 +45,21 @@ bool Board::loadFromFile(std::string fileName)
         y++;
     }
     return (true);
+}
+
+void Board::draw(sf::RenderWindow *window)
+{
+    sf::Vector2f pos = {0, 0};
+
+    for (const std::string &row: _map) {
+        pos.x = 0;
+        for (const char &c: row) {
+            if (c != ' ') {
+                _rect.setPosition(pos);
+                window->draw(_rect);
+            }
+            pos.x += 50;
+        }
+        pos.y += 50;
+    }
 }
