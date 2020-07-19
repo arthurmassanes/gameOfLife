@@ -31,7 +31,6 @@ void Game::pollEvent(void)
 
 void Game::run(void)
 {
-    std::cout << _board.getNbNeighbors(sf::Vector2f(0, 0)) << "\n";
     while (_window->isOpen()) {
         _window->clear(sf::Color::White);
         this->pollEvent();

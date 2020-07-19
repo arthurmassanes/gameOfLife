@@ -19,6 +19,7 @@
 
 #define BOARD_SIZE 100
 #define DEAD_CELL ' '
+#define ALIVE_CELL 'O'
 
 class Board
 {
@@ -38,8 +39,11 @@ public:
 
     // Its evolving
     void evolve(void);
-    int getNbNeighbors(sf::Vector2f);
-    bool isCellAlive(sf::Vector2f);
+    unsigned int getNbNeighbors(sf::Vector2f) const;
+    bool isCellAlive(sf::Vector2f) const;
+    bool shouldCreateCell(sf::Vector2f) const noexcept;
+    bool shouldKillCell(sf::Vector2f) const noexcept;
+    void naturalSelection(std::vector<sf::Vector2f>, std::vector<sf::Vector2f>);
 
     // Getters
     bool isGridVisible(void) const;

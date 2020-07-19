@@ -74,7 +74,7 @@ bool Board::isInvalidPos(sf::Vector2f pos) const noexcept
         return (false);
 }
 
-bool Board::isCellAlive(sf::Vector2f pos)
+bool Board::isCellAlive(sf::Vector2f pos) const
 {
     if (isInvalidPos(pos)) {
         return (false);
@@ -120,9 +120,9 @@ void Board::toggleGridVisibility(void)
     _isGridVisible = !_isGridVisible;
 }
 
-int Board::getNbNeighbors(sf::Vector2f pos)
+unsigned int Board::getNbNeighbors(sf::Vector2f pos) const
 {
-    int nb = 0;
+    unsigned int nb = 0;
     std::vector<sf::Vector2f> neighbors = {
         // top row
         { .x = pos.x - 1, .y = pos.y - 1 },
@@ -144,18 +144,55 @@ int Board::getNbNeighbors(sf::Vector2f pos)
     return (nb);
 }
 
+bool Board::shouldCreateCell(sf::Vector2f pos) const noexcept
+{
+    int neighbors = 0;
+
+    if (isCellAlive(pos))
+        return (false);
+    neighbors = getNbNeighbors(pos);
+    if (neighbors == 3)
+        return (true);
+    return (false);
+}
+
+bool Board::shouldKillCell(sf::Vector2f pos) const noexcept
+{
+    int neighbors = 0;
+
+    if (!isCellAlive(pos))
+        return (false);
+    neighbors = getNbNeighbors(pos);
+    if (neighbors == 2 || neighbors == 3)
+        return (false);
+    return (true);
+}
+
+void Board::naturalSelection(std::vector<sf::Vector2f> newCells, std::vector<sf::Vector2f> toDie)
+{
+    for (const sf::Vector2f &newPos: newCells)
+        _map[newPos.y][newPos.x] = ALIVE_CELL;
+    for (const sf::Vector2f &diePos: toDie)
+        _map[diePos.y][diePos.x] = DEAD_CELL;
+}
+
 void Board::evolve(void)
 {
     std::vector<sf::Vector2f> newCells = {};
-    int y = 0;
-    int x = 0;
+    std::vector<sf::Vector2f> toDie = {};
+    sf::Vector2f pos = {0, 0};
 
-    (void)x;
     for (std::string &row: _map) {
-        x = 0;
+        pos.x = 0;
         for (const char &cell: row) {
             (void)cell;
+            if (shouldCreateCell(pos))
+                newCells.push_back(pos);
+            else if (shouldKillCell(pos))
+                toDie.push_back(pos);
+            pos.x++;
         }
-        y++;
+        pos.y++;
     }
+    this->naturalSelection(newCells, toDie);
 }
