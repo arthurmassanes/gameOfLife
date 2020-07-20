@@ -237,15 +237,20 @@ void Board::reInitMap(void)
     _generation = 0;
 }
 
-void Board::click(sf::Vector2f pos)
+void Board::click(sf::Vector2f pos, bool hasShift)
 {
     int x = (pos.x - _offset) / _cellSize;
     int y = (pos.y) / _cellSize;
+    bool isThisCellAlive = isCellAlive(sf::Vector2f(x, y));
 
-    if (x > 0 && !isCellAlive(sf::Vector2f(x, y))) {
+    if (x <= 0 || pos.x <= 0 || pos.y <= 0
+        || y > getHeight() || x > getWidth(y)) {
+        return;
+    } else if (!isThisCellAlive) {
         _map[y][x] = ALIVE_CELL;
         std::cout << "Cell added at " << x << "-" << y << "\n";
-    }
+    } else if (!hasShift)
+        _map[y][x] = DEAD_CELL;
 }
 
 int Board::getGeneration(void) const { return (_generation); }

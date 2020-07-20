@@ -14,6 +14,7 @@ Game::Game(sf::RenderWindow *window, std::string mapFile)
         throw Error("Cannot build board", "Game::Game");
     window->setFramerateLimit(FPS);
     _toolbar = new Toolbar(sf::Color(191, 191, 191, 200), _board.getFileName());
+    _window->setKeyRepeatEnabled(true);
 }
 
 Game::~Game(void)
@@ -23,8 +24,9 @@ Game::~Game(void)
 
 bool Game::mouseClicked(sf::Event &event)
 {
-    return (event.type == sf::Event::MouseButtonPressed
-            && event.mouseButton.button == sf::Mouse::Left);
+    return ((event.type == sf::Event::MouseButtonPressed
+            && event.mouseButton.button == sf::Mouse::Left)
+            || (_keyboard.isKeyPressed(sf::Keyboard::LShift)));
 }
 
 void Game::pollEvent(void)
@@ -56,7 +58,7 @@ void Game::pollEvent(void)
                  && event.key.code == sf::Keyboard::Space)
             _paused = !_paused;
         else if (this->mouseClicked(event)) {
-            _board.click(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+            _board.click((sf::Vector2<float>)sf::Mouse::getPosition(*_window), _keyboard.isKeyPressed(sf::Keyboard::LShift));
         }
     }
 }

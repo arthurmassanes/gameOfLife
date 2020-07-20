@@ -46,7 +46,7 @@ public:
     void animateColor(void);
 
     // fuck the 4th wall
-    void click(sf::Vector2f);
+    void click(sf::Vector2f, bool hasShift);
 
     // Its evolving
     int evolve(void);
