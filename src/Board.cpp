@@ -189,7 +189,7 @@ void Board::naturalSelection(std::vector<sf::Vector2f> newCells, std::vector<sf:
         _map[diePos.y][diePos.x] = DEAD_CELL;
 }
 
-void Board::evolve(void)
+int Board::evolve(int generation)
 {
     std::vector<sf::Vector2f> newCells = {};
     std::vector<sf::Vector2f> toDie = {};
@@ -208,6 +208,7 @@ void Board::evolve(void)
         pos.y++;
     }
     this->naturalSelection(newCells, toDie);
+    return (generation + 1);
 }
 
 void Board::setCellSize(int size)

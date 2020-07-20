@@ -30,6 +30,7 @@ class Game
     sf::RenderWindow *_window;
     sf::Keyboard _keyboard;
     Toolbar *_toolbar;
+    bool _paused = false;
 public:
     Game(sf::RenderWindow *win, std::string mapFile);
     ~Game(void);

@@ -42,7 +42,7 @@ public:
     void animateColor(void);
 
     // Its evolving
-    void evolve(void);
+    int evolve(int generation);
     unsigned int getNbNeighbors(sf::Vector2f) const;
     bool isCellAlive(sf::Vector2f) const;
     bool shouldCreateCell(sf::Vector2f) const noexcept;
@@ -60,7 +60,6 @@ public:
     int getCellSize(void) const;
     void setOffset(int);
     int getOffset(void) const;
-
 };
 
 

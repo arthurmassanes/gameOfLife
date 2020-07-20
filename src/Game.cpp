@@ -39,7 +39,8 @@ void Game::pollEvent(void)
         _board.setOffset(_board.getOffset() + cellSize);
     if (_keyboard.isKeyPressed(sf::Keyboard::Right))
         _board.setOffset(_board.getOffset() - cellSize);
-
+    if (_keyboard.isKeyPressed(sf::Keyboard::Space))
+        _paused = !_paused;
     while (_window->pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             _window->close();
@@ -58,8 +59,8 @@ void Game::run(void)
         _toolbar->update(generation);
         _window->display();
         try {
-            _board.evolve();
-            generation++;
+            if (!_paused)
+                generation = _board.evolve(generation);
         } catch (const Error &e) {
             e.printErr();
         }
