@@ -33,6 +33,7 @@ class Board
     int _offset = 10;
     int _nbCells = 0;
     std::string _fileName;
+    int _generation;
 public:
     Board(void);
     void draw(sf::RenderWindow *);
@@ -48,7 +49,7 @@ public:
     void click(sf::Vector2f);
 
     // Its evolving
-    int evolve(int generation);
+    int evolve(void);
     unsigned int getNbNeighbors(sf::Vector2f) const;
     bool isCellAlive(sf::Vector2f) const;
     bool shouldCreateCell(sf::Vector2f) const noexcept;
@@ -60,10 +61,12 @@ public:
     std::string getFileName(void) const;
     int getNbCells(void) const;
     int getHeight(void) const;
+    int getGeneration(void) const;
     // This one needs a y parameter
     // since some lines are longer than others
     int getWidth(int y) const;
     bool isInvalidPos(sf::Vector2f) const noexcept;
+    void setGeneration(int);
     void setCellSize(int size);
     int getCellSize(void) const;
     void setOffset(int);

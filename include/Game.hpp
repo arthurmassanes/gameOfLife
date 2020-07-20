@@ -31,6 +31,7 @@ class Game
     sf::Keyboard _keyboard;
     Toolbar *_toolbar;
     bool _paused = true;
+    int _generation = 0;
 public:
     Game(sf::RenderWindow *win, std::string mapFile);
     ~Game(void);

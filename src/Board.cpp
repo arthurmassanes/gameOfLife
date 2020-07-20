@@ -16,6 +16,7 @@ Board::Board(void)
     }
     _rect.setFillColor(_cellColor);
     _rect.setSize(sf::Vector2f(_cellSize, _cellSize));
+    _generation = 0;
 }
 
 void Board::dump(void)
@@ -193,7 +194,7 @@ void Board::naturalSelection(std::vector<sf::Vector2f> newCells, std::vector<sf:
         _map[diePos.y][diePos.x] = DEAD_CELL;
 }
 
-int Board::evolve(int generation)
+int Board::evolve()
 {
     std::vector<sf::Vector2f> newCells = {};
     std::vector<sf::Vector2f> toDie = {};
@@ -212,7 +213,8 @@ int Board::evolve(int generation)
         pos.y++;
     }
     this->naturalSelection(newCells, toDie);
-    return (generation + 1);
+    _generation++;
+    return (_generation);
 }
 
 void Board::setCellSize(int size)
@@ -232,6 +234,7 @@ std::string Board::getFileName(void) const { return (_fileName); }
 void Board::reInitMap(void)
 {
     _map = _mapSave;
+    _generation = 0;
 }
 
 void Board::click(sf::Vector2f pos)
@@ -239,8 +242,11 @@ void Board::click(sf::Vector2f pos)
     int x = (pos.x - _offset) / _cellSize;
     int y = (pos.y) / _cellSize;
 
-    std::cout << x<<"-"<<y << "\n";
     if (x > 0 && !isCellAlive(sf::Vector2f(x, y))) {
         _map[y][x] = ALIVE_CELL;
+        std::cout << "Cell added at " << x << "-" << y << "\n";
     }
 }
+
+int Board::getGeneration(void) const { return (_generation); }
+void Board::setGeneration(int gen) { _generation = gen; }
