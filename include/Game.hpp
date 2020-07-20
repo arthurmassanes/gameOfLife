@@ -15,6 +15,7 @@
 
 #include "Board.hpp"
 #include "Error.hpp"
+#include "Toolbar.hpp"
 
 #define WIDTH 1000
 #define HEIGHT 1000
@@ -28,8 +29,10 @@ class Game
     Board _board;
     sf::RenderWindow *_window;
     sf::Keyboard _keyboard;
+    Toolbar *_toolbar;
 public:
     Game(sf::RenderWindow *win, std::string mapFile);
+    ~Game(void);
     void run(void);
     void pollEvent(void);
 };
