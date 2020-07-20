@@ -26,13 +26,17 @@ class Toolbar
     sf::Text _generation;
     sf::Text _keysList;
     sf::Text _cells;
+    sf::Text _fileNameText;
     int _generationNb;
+    std::string _fileName;
 public:
     Toolbar(void);
     Toolbar(sf::Color);
+    Toolbar(sf::Color, std::string);
     void draw(sf::RenderWindow *);
     void update(int generation, int cells = 0);
     void loadInstructions(void);
+
 };
 
 

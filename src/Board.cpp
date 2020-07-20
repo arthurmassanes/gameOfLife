@@ -32,6 +32,7 @@ bool Board::loadFromFile(std::string fileName)
     unsigned int y = 0;
     unsigned int x = 0;
 
+    _fileName = fileName;
     if (!file) {
         std::cerr << "Could not read file '" << fileName << "'\n";
         return (false);
@@ -224,3 +225,5 @@ void Board::setOffset(int offset) { _offset = offset; }
 int Board::getOffset(void) const { return (_offset); }
 
 int Board::getNbCells(void) const { return (_nbCells); }
+
+std::string Board::getFileName(void) const { return (_fileName); }

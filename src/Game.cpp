@@ -13,7 +13,7 @@ Game::Game(sf::RenderWindow *window, std::string mapFile)
     if (!_board.loadFromFile(mapFile))
         throw Error("Cannot build board", "Game::Game");
     window->setFramerateLimit(FPS);
-    _toolbar = new Toolbar(sf::Color(191, 191, 191, 200));
+    _toolbar = new Toolbar(sf::Color(191, 191, 191, 200), _board.getFileName());
 }
 
 Game::~Game(void)

@@ -11,7 +11,7 @@ Toolbar::Toolbar(void): Toolbar(sf::Color::Black)
 {
 }
 
-Toolbar::Toolbar(sf::Color color)
+Toolbar::Toolbar(sf::Color color, std::string fileName)
 {
     _barColor = color;
     _bar.setFillColor(color);
@@ -20,7 +20,12 @@ Toolbar::Toolbar(sf::Color color)
     _bar.setOutlineColor(sf::Color::Black);
     _bar.setPosition(0, 800);
     _generationNb = 0;
+    _fileName = fileName;
     loadInstructions();
+}
+
+Toolbar::Toolbar(sf::Color color): Toolbar(color, "Unkown file")
+{
 }
 
 void Toolbar::loadInstructions(void)
@@ -41,6 +46,11 @@ void Toolbar::loadInstructions(void)
     _keysList.setPosition(sf::Vector2f({ .x = _bar.getPosition().x + 20, .y = _bar.getPosition().y + 75}));
     _keysList.setCharacterSize(18);
     _keysList.setStyle(sf::Text::Italic);
+
+    _fileNameText = sf::Text(_fileName, _font);
+    _fileNameText.setFillColor(sf::Color::Blue);
+    _fileNameText.setPosition(sf::Vector2f({ .x = _bar.getPosition().x + 700, .y = _bar.getPosition().y + 10}));
+    _fileNameText.setCharacterSize(16);
 }
 
 void Toolbar::update(int generation, int cells)
@@ -56,4 +66,5 @@ void Toolbar::draw(sf::RenderWindow *window)
     window->draw(_generation);
     window->draw(_keysList);
     window->draw(_cells);
+    window->draw(_fileNameText);
 }

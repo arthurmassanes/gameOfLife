@@ -31,6 +31,7 @@ class Board
     bool _reverseColor = false;
     int _offset = 10;
     int _nbCells = 0;
+    std::string _fileName;
 public:
     Board(void);
     void draw(sf::RenderWindow *);
@@ -52,6 +53,7 @@ public:
 
     // Getters
     bool isGridVisible(void) const;
+    std::string getFileName(void) const;
     int getNbCells(void) const;
     int getHeight(void) const;
     // This one needs a y parameter
