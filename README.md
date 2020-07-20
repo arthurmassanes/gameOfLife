@@ -4,6 +4,7 @@ Conway's (RIP) Game of Life implemented in C++
 # Requirements
 `g++`
 `sfml-window, lsfml-system, sfml-graphics`
+`make`
 
 # Installation & Compilation
 ```bash
