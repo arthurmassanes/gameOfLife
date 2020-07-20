@@ -69,7 +69,7 @@ void Game::run(void)
         _window->clear(sf::Color::White);
         this->pollEvent();
         _board.draw(_window);
-        _toolbar->draw(_window);
+        _toolbar->draw(_window, _paused);
         _toolbar->update(_board.getGeneration(), _board.getNbCells());
         _window->display();
         try {

@@ -51,6 +51,11 @@ void Toolbar::loadInstructions(void)
     _fileNameText.setFillColor(sf::Color::Blue);
     _fileNameText.setPosition(sf::Vector2f({ .x = _bar.getPosition().x + 700, .y = _bar.getPosition().y + 10}));
     _fileNameText.setCharacterSize(16);
+
+    _pause = sf::Text(PAUSE_TEXT, _font);
+    _pause.setFillColor(sf::Color::Red);
+    _pause.setPosition(sf::Vector2f({ .x = _bar.getPosition().x , .y = _bar.getPosition().y - 35}));
+    _pause.setCharacterSize(20);
 }
 
 void Toolbar::update(int generation, int cells)
@@ -60,11 +65,13 @@ void Toolbar::update(int generation, int cells)
     _cells.setString(CELLS_TEXT + std::to_string(cells));
 }
 
-void Toolbar::draw(sf::RenderWindow *window)
+void Toolbar::draw(sf::RenderWindow *window, bool isPause)
 {
     window->draw(_bar);
     window->draw(_generation);
     window->draw(_keysList);
     window->draw(_cells);
     window->draw(_fileNameText);
+    if (isPause)
+        window->draw(_pause);
 }

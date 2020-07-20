@@ -18,6 +18,7 @@
 
 #define CELLS_TEXT "Cells: "
 #define GENERATION_TEXT "Generation: "
+#define PAUSE_TEXT "[Space] Launch simulation"
 
 class Toolbar
 {
@@ -28,13 +29,14 @@ class Toolbar
     sf::Text _keysList;
     sf::Text _cells;
     sf::Text _fileNameText;
+    sf::Text _pause;
     int _generationNb;
     std::string _fileName;
 public:
     Toolbar(void);
     Toolbar(sf::Color);
     Toolbar(sf::Color, std::string);
-    void draw(sf::RenderWindow *);
+    void draw(sf::RenderWindow *, bool);
     void update(int generation, int cells = 0);
     void loadInstructions(void);
 
