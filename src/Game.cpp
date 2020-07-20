@@ -39,6 +39,8 @@ void Game::pollEvent(void)
         _board.setOffset(_board.getOffset() + cellSize);
     if (_keyboard.isKeyPressed(sf::Keyboard::Right))
         _board.setOffset(_board.getOffset() - cellSize);
+    if (_keyboard.isKeyPressed(sf::Keyboard::BackSpace))
+        _board.reInitMap();
     while (_window->pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             _window->close();

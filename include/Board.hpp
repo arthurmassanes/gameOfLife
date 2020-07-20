@@ -25,6 +25,7 @@ class Board
 {
     int _cellSize = 10;
     std::vector<std::string> _map;
+    std::vector<std::string> _mapSave;
     sf::RectangleShape _rect;
     bool _isGridVisible = true;
     sf::Color _cellColor = sf::Color::Blue;
@@ -64,6 +65,7 @@ public:
     int getCellSize(void) const;
     void setOffset(int);
     int getOffset(void) const;
+    void reInitMap(void);
 };
 
 

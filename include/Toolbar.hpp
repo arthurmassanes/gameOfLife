@@ -13,7 +13,8 @@
 #define KEYS_TEXT "[Left] Move left\n[Right] Move right\
 \n[Up] Zoom in\
 \n[Down] Zoom out\
-\n[Space] Toggle pause"
+\n[Space] Toggle pause\
+\n[BackSpace] Board reset"
 
 #define CELLS_TEXT "Cells: "
 #define GENERATION_TEXT "Generation: "

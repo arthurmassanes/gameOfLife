@@ -42,7 +42,7 @@ void Toolbar::loadInstructions(void)
     _cells.setCharacterSize(24);
 
     _keysList = sf::Text(KEYS_TEXT, _font);
-    _keysList.setFillColor(sf::Color(0, 0, 0, 100));
+    _keysList.setFillColor(sf::Color(0, 0, 0, 150));
     _keysList.setPosition(sf::Vector2f({ .x = _bar.getPosition().x + 20, .y = _bar.getPosition().y + 75}));
     _keysList.setCharacterSize(18);
     _keysList.setStyle(sf::Text::Italic);

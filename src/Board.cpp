@@ -50,6 +50,7 @@ bool Board::loadFromFile(std::string fileName)
         if (y >= _map.size())
             _map.push_back(std::string());
     }
+    _mapSave = std::vector<std::string>(_map);
     return (true);
 }
 
@@ -227,3 +228,8 @@ int Board::getOffset(void) const { return (_offset); }
 int Board::getNbCells(void) const { return (_nbCells); }
 
 std::string Board::getFileName(void) const { return (_fileName); }
+
+void Board::reInitMap(void)
+{
+    _map = _mapSave;
+}
