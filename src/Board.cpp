@@ -233,3 +233,14 @@ void Board::reInitMap(void)
 {
     _map = _mapSave;
 }
+
+void Board::click(sf::Vector2f pos)
+{
+    int x = (pos.x - _offset) / _cellSize;
+    int y = (pos.y) / _cellSize;
+
+    std::cout << x<<"-"<<y << "\n";
+    if (x > 0 && !isCellAlive(sf::Vector2f(x, y))) {
+        _map[y][x] = ALIVE_CELL;
+    }
+}

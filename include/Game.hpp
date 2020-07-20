@@ -36,6 +36,7 @@ public:
     ~Game(void);
     void run(void);
     void pollEvent(void);
+    bool mouseClicked(sf::Event &);
 };
 
 

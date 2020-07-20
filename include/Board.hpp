@@ -44,6 +44,9 @@ public:
     void toggleGridVisibility(void);
     void animateColor(void);
 
+    // fuck the 4th wall
+    void click(sf::Vector2f);
+
     // Its evolving
     int evolve(int generation);
     unsigned int getNbNeighbors(sf::Vector2f) const;

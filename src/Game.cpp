@@ -21,6 +21,12 @@ Game::~Game(void)
     delete _toolbar;
 }
 
+bool Game::mouseClicked(sf::Event &event)
+{
+    return (event.type == sf::Event::MouseButtonPressed
+            && event.mouseButton.button == sf::Mouse::Left);
+}
+
 void Game::pollEvent(void)
 {
     sf::Event event;
@@ -36,9 +42,9 @@ void Game::pollEvent(void)
         _board.setCellSize(cellSize - 2);
     cellSize = _board.getCellSize();
     if (_keyboard.isKeyPressed(sf::Keyboard::Left))
-        _board.setOffset(_board.getOffset() + cellSize);
+        _board.setOffset(_board.getOffset() + (cellSize * 2));
     if (_keyboard.isKeyPressed(sf::Keyboard::Right))
-        _board.setOffset(_board.getOffset() - cellSize);
+        _board.setOffset(_board.getOffset() - (cellSize * 2));
     if (_keyboard.isKeyPressed(sf::Keyboard::BackSpace))
         _board.reInitMap();
     while (_window->pollEvent(event)) {
@@ -47,6 +53,9 @@ void Game::pollEvent(void)
         else if (event.type == sf::Event::KeyReleased
                  && event.key.code == sf::Keyboard::Space)
             _paused = !_paused;
+        else if (this->mouseClicked(event)) {
+            _board.click(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+        }
     }
 }
 
