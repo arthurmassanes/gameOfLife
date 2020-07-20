@@ -20,7 +20,7 @@ Toolbar::Toolbar(sf::Color color, std::string fileName)
     _bar.setOutlineColor(sf::Color::Black);
     _bar.setPosition(0, 800);
     _generationNb = 0;
-    _fileName = fileName;
+    _fileName = std::string(fileName);
     loadInstructions();
 }
 

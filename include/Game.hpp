@@ -17,6 +17,7 @@
 #include "Board.hpp"
 #include "Error.hpp"
 #include "Toolbar.hpp"
+#include "StartupAnimation.hpp"
 
 #define WIDTH 1000
 #define HEIGHT 1000

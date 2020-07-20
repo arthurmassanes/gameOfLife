@@ -15,11 +15,14 @@
 #include <iostream>
 #include <fstream>
 
+#define FONT "fonts/font.ttf"
+
 #include "Error.hpp"
 
 #define BOARD_SIZE 100
 #define DEAD_CELL ' '
 #define ALIVE_CELL 'O'
+#define SAVED_TEXT "File saved !"
 
 class Board
 {
@@ -34,11 +37,15 @@ class Board
     int _nbCells = 0;
     std::string _fileName;
     int _generation;
+    sf::Font _font;
+    sf::Text _savedText;
+    int _saveOpacity;
 public:
     Board(void);
     void draw(sf::RenderWindow *);
     void dump(void);
     bool loadFromFile(std::string fileName);
+    bool writeToFile(void);
 
     // Board grid
     void setGridVisibility(bool);
@@ -47,6 +54,7 @@ public:
 
     // fuck the 4th wall
     void click(sf::Vector2f, bool hasShift);
+    void clear(void);
 
     // Its evolving
     int evolve(void);

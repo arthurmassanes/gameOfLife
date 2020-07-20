@@ -12,8 +12,8 @@ Game::Game(sf::RenderWindow *window, std::string mapFile)
     _window = window;
     if (!_board.loadFromFile(mapFile))
         throw Error("Cannot build board", "Game::Game");
-    window->setFramerateLimit(FPS);
     _toolbar = new Toolbar(sf::Color(191, 191, 191, 200), _board.getFileName());
+    window->setFramerateLimit(FPS);
     _window->setKeyRepeatEnabled(true);
 }
 
@@ -51,6 +51,12 @@ void Game::pollEvent(void)
         _board.reInitMap();
         _paused = true;
     }
+    if (_keyboard.isKeyPressed(sf::Keyboard::B))
+        _board.clear();
+    if (_keyboard.isKeyPressed(sf::Keyboard::Return))
+        _board.writeToFile();
+    if (_keyboard.isKeyPressed(sf::Keyboard::G))
+        _board.toggleGridVisibility();
     while (_window->pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             _window->close();
@@ -65,6 +71,9 @@ void Game::pollEvent(void)
 
 void Game::run(void)
 {
+    StartupAnimation beginAnimation;
+
+    beginAnimation.play(_window);
     while (_window->isOpen()) {
         _window->clear(sf::Color::White);
         this->pollEvent();

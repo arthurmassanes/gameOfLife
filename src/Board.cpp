@@ -9,6 +9,8 @@
 
 Board::Board(void)
 {
+    sf::Color color = sf::Color::Green;
+
     for (int y = 0; y < BOARD_SIZE; y++) {
         _map.push_back("");
         for (int x = 0; x < BOARD_SIZE; x++)
@@ -17,6 +19,14 @@ Board::Board(void)
     _rect.setFillColor(_cellColor);
     _rect.setSize(sf::Vector2f(_cellSize, _cellSize));
     _generation = 0;
+    _font.loadFromFile(FONT);
+    _savedText = sf::Text(SAVED_TEXT, _font);
+    _saveOpacity = 10;
+    color.a = _saveOpacity;
+    _savedText.setFillColor(color);
+    _savedText.setPosition(sf::Vector2f({ 10 , 10 }));
+    _savedText.setCharacterSize(24);
+    std::cout << _saveOpacity << "\n";
 }
 
 void Board::dump(void)
@@ -52,6 +62,24 @@ bool Board::loadFromFile(std::string fileName)
             _map.push_back(std::string());
     }
     _mapSave = std::vector<std::string>(_map);
+    file.close();
+    return (true);
+}
+
+bool Board::writeToFile(void)
+{
+    std::ofstream file(_fileName);
+    std::string line;
+
+    if (!file) {
+        std::cerr << "Cannot write file\n";
+        return (false);
+    }
+    for (const std::string &line : _map)
+        file << line << "\n";
+    file.close();
+    _mapSave = _map;
+    _saveOpacity = 250;
     return (true);
 }
 
@@ -88,13 +116,25 @@ bool Board::isCellAlive(sf::Vector2f pos) const
 void Board::animateColor(void)
 {
     int off = _reverseColor ? -5 : 5;
+    sf::Color textColor = _savedText.getFillColor();
 
+    if (_saveOpacity >= 10) {
+        _saveOpacity -= 7;
+        textColor.a = _saveOpacity;
+    }
+    _savedText.setFillColor(textColor);
     if (_cellColor.r >= 250)
         _reverseColor = true;
     else if (_cellColor.r <= 100)
         _reverseColor = false;
     _cellColor.r += off;
     _rect.setFillColor(_cellColor);
+}
+
+void Board::clear(void)
+{
+    for (std::string &line: _map)
+        std::replace(line.begin(), line.end(), ALIVE_CELL , DEAD_CELL);
 }
 
 void Board::draw(sf::RenderWindow *window)
@@ -121,6 +161,7 @@ void Board::draw(sf::RenderWindow *window)
         }
         pos.y += _cellSize;
     }
+    window->draw(_savedText);
 }
 
 void Board::setGridVisibility(bool visible)

@@ -28,6 +28,7 @@ SRC		=	$(SRC_PATH)main.cpp	\
 			$(SRC_PATH)Game.cpp	\
 			$(SRC_PATH)Error.cpp	\
 			$(SRC_PATH)Toolbar.cpp	\
+			$(SRC_PATH)StartupAnimation.cpp	\
 
 OBJ 	= 	$(SRC:.cpp=.o)
 
