@@ -57,7 +57,7 @@ void Game::run(void)
         this->pollEvent();
         _board.draw(_window);
         _toolbar->draw(_window);
-        _toolbar->update(generation);
+        _toolbar->update(generation, _board.getNbCells());
         _window->display();
         try {
             if (!_paused)

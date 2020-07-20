@@ -26,22 +26,28 @@ Toolbar::Toolbar(sf::Color color)
 void Toolbar::loadInstructions(void)
 {
     _font.loadFromFile(FONT);
-    _generation = sf::Text("Generation: ", _font);
+    _generation = sf::Text(GENERATION_TEXT, _font);
     _generation.setFillColor(sf::Color::Black);
     _generation.setPosition(sf::Vector2f({ .x = _bar.getPosition().x + 20, .y = _bar.getPosition().y + 10}));
     _generation.setCharacterSize(24);
 
+    _cells = sf::Text(CELLS_TEXT, _font);
+    _cells.setFillColor(sf::Color::Black);
+    _cells.setPosition(sf::Vector2f({ .x = _bar.getPosition().x + 20, .y = _bar.getPosition().y + 40}));
+    _cells.setCharacterSize(24);
+
     _keysList = sf::Text(KEYS_TEXT, _font);
     _keysList.setFillColor(sf::Color(0, 0, 0, 100));
-    _keysList.setPosition(sf::Vector2f({ .x = _bar.getPosition().x + 20, .y = _bar.getPosition().y + 50}));
+    _keysList.setPosition(sf::Vector2f({ .x = _bar.getPosition().x + 20, .y = _bar.getPosition().y + 75}));
     _keysList.setCharacterSize(18);
     _keysList.setStyle(sf::Text::Italic);
 }
 
-void Toolbar::update(int generation)
+void Toolbar::update(int generation, int cells)
 {
     _generationNb = generation;
-    _generation.setString("Generation: " + std::to_string(_generationNb));
+    _generation.setString(GENERATION_TEXT + std::to_string(_generationNb));
+    _cells.setString(CELLS_TEXT + std::to_string(cells));
 }
 
 void Toolbar::draw(sf::RenderWindow *window)
@@ -49,4 +55,5 @@ void Toolbar::draw(sf::RenderWindow *window)
     window->draw(_bar);
     window->draw(_generation);
     window->draw(_keysList);
+    window->draw(_cells);
 }

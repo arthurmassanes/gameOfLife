@@ -102,10 +102,12 @@ void Board::draw(sf::RenderWindow *window)
     _grid.setSize(sf::Vector2f(2, 2));
     _grid.setFillColor(sf::Color::Black);
     this->animateColor();
+    _nbCells = 0;
     for (const std::string &row: _map) {
          pos.x = 0 + _offset;
         for (const char &c: row) {
             if (c != DEAD_CELL) {
+                _nbCells++;
                 _rect.setPosition(pos);
                 window->draw(_rect);
             }
@@ -220,3 +222,5 @@ int Board::getCellSize(void) const { return (_cellSize); }
 
 void Board::setOffset(int offset) { _offset = offset; }
 int Board::getOffset(void) const { return (_offset); }
+
+int Board::getNbCells(void) const { return (_nbCells); }

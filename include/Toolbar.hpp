@@ -15,6 +15,9 @@
 \n[Down] Zoom out\
 \n[Space] Toggle pause"
 
+#define CELLS_TEXT "Cells: "
+#define GENERATION_TEXT "Generation: "
+
 class Toolbar
 {
     sf::RectangleShape _bar;
@@ -22,12 +25,13 @@ class Toolbar
     sf::Font _font;
     sf::Text _generation;
     sf::Text _keysList;
+    sf::Text _cells;
     int _generationNb;
 public:
     Toolbar(void);
     Toolbar(sf::Color);
     void draw(sf::RenderWindow *);
-    void update(int);
+    void update(int generation, int cells = 0);
     void loadInstructions(void);
 };
 
