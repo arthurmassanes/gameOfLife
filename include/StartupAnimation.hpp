@@ -18,10 +18,14 @@
 class StartupAnimation
 {
     bool _hasPressedKey = false;
+    bool _isDone = false;
+    sf::RectangleShape _fade;
     sf::Font _font;
     sf::Text _title;
     sf::Text _text;
     sf::Color _textColor;
+    sf::Color _fadeColor;
+    int _opacityOffset = 25;
 public:
     StartupAnimation(void);
     void play(sf::RenderWindow *);

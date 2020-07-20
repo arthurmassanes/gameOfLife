@@ -7,7 +7,7 @@
 
 #include "StartupAnimation.hpp"
 
-StartupAnimation::StartupAnimation(void): _textColor(sf::Color::Black)
+StartupAnimation::StartupAnimation(void): _textColor(sf::Color::Black), _fadeColor(sf::Color::Black)
 {
     if (!_font.loadFromFile(MAIN_FONT))
         throw Error("Cannot create startup font", "StartupAnimation::StartupAnimation");
@@ -21,11 +21,15 @@ StartupAnimation::StartupAnimation(void): _textColor(sf::Color::Black)
     _title.setCharacterSize(75);
     _title.setFillColor(sf::Color::Blue);
 
+    _fadeColor.a = 10;
+    _fade.setPosition(sf::Vector2f(0, 0));
+    _fade.setSize(sf::Vector2f(1000, 1000));
+    _fade.setFillColor(_fadeColor);
 }
 
 bool StartupAnimation::isDone(void)
 {
-    return (_hasPressedKey);
+    return (_hasPressedKey && _isDone);
 }
 
 void StartupAnimation::pollEvent(sf::RenderWindow *window)
@@ -35,6 +39,10 @@ void StartupAnimation::pollEvent(sf::RenderWindow *window)
     while (window->pollEvent(event)) {
         if (event.type == sf::Event::KeyPressed)
             _hasPressedKey = true;
+        if (event.type == sf::Event::Closed
+                 || (event.type == sf::Event::KeyPressed
+                     && event.key.code == sf::Keyboard::Escape))
+            window->close();
     }
 }
 
@@ -42,8 +50,16 @@ void StartupAnimation::animateText(sf::RenderWindow *window)
 {
     _textColor.a -= 10;
     _text.setFillColor(_textColor);
-    window->draw(_text);
-    window->draw(_title);
+    if (_hasPressedKey)
+        _fadeColor.a += _opacityOffset;
+    _fade.setFillColor(_fadeColor);
+    window->draw(_fade);
+    if (!_hasPressedKey) {
+        window->draw(_text);
+        window->draw(_title);
+    }
+    _isDone = _fadeColor.a <= 5;
+    _opacityOffset = _fadeColor.a >= 250 ? (_opacityOffset * -1): _opacityOffset;
 }
 
 void StartupAnimation::play(sf::RenderWindow *window)
