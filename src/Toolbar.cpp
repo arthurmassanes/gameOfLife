@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2020
+** ARTHUR MASSANES PROJECT, 2020
 ** gameOfLife
 ** File description:
 ** toolbar class
