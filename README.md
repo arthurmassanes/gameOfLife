@@ -13,6 +13,10 @@ cd gameOfLife
 make
 ./gameOfLife
 ```
+# Maps
+Maps are ascii text files, with spaces representing dead cells (any character will be interpreted as a cell)
+
+Pass an empty text file to the game and it will overwrite it on save (*Return*)
 
 # Usage
 `./gameOfLife` *Starts with default map (`maps/default.map`)*
