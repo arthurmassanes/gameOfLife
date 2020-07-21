@@ -20,3 +20,6 @@ make
 `./gameOfLife map_name` *Starts with map "map_name"*
 
 `./gameOfLife -h` *Displays usage*
+
+![Screenshot 1](https://raw.githubusercontent.com/arthurmassanes/gameOfLife/master/screenshots/screen1.png)
+
