@@ -17,10 +17,11 @@
 \n[Left] Move left\n[Right] Move right\
 \n[Up] Zoom in\
 \n[Down] Zoom out\
-\n\n[BackSpace] Board reset\
-\n[Return] Board save\
+\n\n[Return] Board save                           \
+\n[BackSpace] Board reset\
 \n[B] Clear board\
-\n\n[G] Toggle grid"
+\n\n[G] Toggle grid\
+\n[Left Shift] Pencil mode"
 
 #define HELP_TEXT "Help"
 
