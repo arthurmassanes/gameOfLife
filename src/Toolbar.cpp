@@ -21,11 +21,18 @@ Toolbar::Toolbar(sf::Color color, std::string fileName)
     _bar.setPosition(0, 800);
     _generationNb = 0;
     _fileName = std::string(fileName);
+    _helpButton = new HelpButton(_font);
+    _helpButton->setPosition(sf::Vector2f(_bar.getPosition().x + 25, _bar.getPosition().y + 100));
     loadInstructions();
 }
 
 Toolbar::Toolbar(sf::Color color): Toolbar(color, "Unkown file")
 {
+}
+
+Toolbar::~Toolbar(void)
+{
+    delete _helpButton;
 }
 
 void Toolbar::loadInstructions(void)
@@ -40,12 +47,6 @@ void Toolbar::loadInstructions(void)
     _cells.setFillColor(sf::Color::Black);
     _cells.setPosition(sf::Vector2f({ .x = _bar.getPosition().x + 20, .y = _bar.getPosition().y + 40}));
     _cells.setCharacterSize(24);
-
-    _keysList = sf::Text(KEYS_TEXT, _font);
-    _keysList.setFillColor(sf::Color(0, 0, 0, 150));
-    _keysList.setPosition(sf::Vector2f({ .x = _bar.getPosition().x + 20, .y = _bar.getPosition().y + 75}));
-    _keysList.setCharacterSize(18);
-    _keysList.setStyle(sf::Text::Italic);
 
     _fileNameText = sf::Text(_fileName, _font);
     _fileNameText.setFillColor(sf::Color::Blue);
@@ -63,15 +64,17 @@ void Toolbar::update(int generation, int cells)
     _generationNb = generation;
     _generation.setString(GENERATION_TEXT + std::to_string(_generationNb));
     _cells.setString(CELLS_TEXT + std::to_string(cells));
+    _helpButton->update(_win);
 }
 
 void Toolbar::draw(sf::RenderWindow *window, bool isPause)
 {
+    _win = window;
     window->draw(_bar);
     window->draw(_generation);
-    window->draw(_keysList);
     window->draw(_cells);
     window->draw(_fileNameText);
     if (isPause)
         window->draw(_pause);
+    _helpButton->draw(window);
 }

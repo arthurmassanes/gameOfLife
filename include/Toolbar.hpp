@@ -9,12 +9,8 @@
 #define TOOLBAR_HPP_
 
 #include "Board.hpp"
+#include "HelpButton.hpp"
 #define FONT "fonts/font.ttf"
-#define KEYS_TEXT "[Left] Move left\n[Right] Move right\
-\n[Up] Zoom in\
-\n[Down] Zoom out\
-\n[Space] Toggle pause\
-\n[BackSpace] Board reset"
 
 #define CELLS_TEXT "Cells: "
 #define GENERATION_TEXT "Generation: "
@@ -22,20 +18,22 @@
 
 class Toolbar
 {
+    sf::RenderWindow *_win;
     sf::RectangleShape _bar;
     sf::Color _barColor;
     sf::Font _font;
     sf::Text _generation;
-    sf::Text _keysList;
     sf::Text _cells;
     sf::Text _fileNameText;
     sf::Text _pause;
     int _generationNb;
     std::string _fileName;
+    HelpButton *_helpButton;
 public:
     Toolbar(void);
     Toolbar(sf::Color);
     Toolbar(sf::Color, std::string);
+    ~Toolbar(void);
     void draw(sf::RenderWindow *, bool);
     void update(int generation, int cells = 0);
     void loadInstructions(void);
