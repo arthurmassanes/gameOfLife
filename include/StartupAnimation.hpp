@@ -19,9 +19,11 @@ class StartupAnimation
 {
     bool _hasPressedKey = false;
     bool _isDone = false;
+    bool _reverseColor = false;
     sf::RectangleShape _fade;
     sf::Font _font;
     sf::Text _title;
+    sf::Color _titleColor;
     sf::Text _text;
     sf::Color _textColor;
     sf::Color _fadeColor;

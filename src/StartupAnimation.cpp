@@ -16,10 +16,11 @@ StartupAnimation::StartupAnimation(void): _textColor(sf::Color::Black), _fadeCol
     _text.setCharacterSize(50);
     _text.setFillColor(_textColor);
 
+    _titleColor = sf::Color::Blue;
     _title = sf::Text(TITLE, _font);
     _title.setPosition(sf::Vector2f(50, 500));
     _title.setCharacterSize(75);
-    _title.setFillColor(sf::Color::Blue);
+    _title.setFillColor(_titleColor);
 
     _fadeColor.a = 10;
     _fade.setPosition(sf::Vector2f(0, 0));
@@ -48,8 +49,16 @@ void StartupAnimation::pollEvent(sf::RenderWindow *window)
 
 void StartupAnimation::animateText(sf::RenderWindow *window)
 {
+    int off = _reverseColor ? -3 : 3;
+
     _textColor.a -= 10;
     _text.setFillColor(_textColor);
+    _titleColor.r += off;
+    if (_titleColor.r >= 250)
+        _reverseColor = true;
+    else if (_titleColor.r <= 100)
+        _reverseColor = false;
+    _title.setFillColor(_titleColor);
     if (_hasPressedKey)
         _fadeColor.a += _opacityOffset;
     _fade.setFillColor(_fadeColor);
