@@ -235,7 +235,7 @@ void Board::naturalSelection(std::vector<sf::Vector2f> newCells, std::vector<sf:
         _map[diePos.y][diePos.x] = DEAD_CELL;
 }
 
-int Board::evolve()
+int Board::evolve(void)
 {
     std::vector<sf::Vector2f> newCells = {};
     std::vector<sf::Vector2f> toDie = {};
