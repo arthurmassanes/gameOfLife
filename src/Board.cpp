@@ -139,7 +139,7 @@ void Board::clear(void)
 
 void Board::draw(sf::RenderWindow *window)
 {
-    sf::Vector2f pos = { .x = (float)0, .y = (float)0};
+    sf::Vector2f pos = { 0, 0 };
     sf::RectangleShape _grid;
 
     _grid.setSize(sf::Vector2f(2, 2));
@@ -182,21 +182,20 @@ void Board::toggleGridVisibility(void)
 unsigned int Board::getNbNeighbors(sf::Vector2f pos) const
 {
     unsigned int nb = 0;
-    std::vector<sf::Vector2f> neighbors = {
+    std::vector<sf::Vector2f> neighbors;
         // top row
-        { .x = pos.x - 1, .y = pos.y - 1 },
-        { .x = pos.x, .y = pos.y - 1 },
-        { .x = pos.x + 1, .y = pos.y - 1 },
+    neighbors.push_back(sf::Vector2f({ pos.x - 1, pos.y - 1 }));
+    neighbors.push_back(sf::Vector2f({ pos.x, pos.y - 1 }));
+    neighbors.push_back(sf::Vector2f({ pos.x + 1, pos.y - 1 }));
 
         // cell row
-        { .x = pos.x - 1, .y = pos.y },
-        { .x = pos.x + 1, .y = pos.y },
+    neighbors.push_back(sf::Vector2f({ pos.x - 1, pos.y }));
+    neighbors.push_back(sf::Vector2f({ pos.x + 1, pos.y }));
 
         // bottom row
-        { .x = pos.x - 1, .y = pos.y + 1 },
-        { .x = pos.x, .y = pos.y + 1 },
-        { .x = pos.x + 1, .y = pos.y + 1 },
-    };
+    neighbors.push_back(sf::Vector2f({ pos.x - 1, pos.y + 1 }));
+    neighbors.push_back(sf::Vector2f({ pos.x, pos.y + 1 }));
+    neighbors.push_back(sf::Vector2f({ pos.x + 1, pos.y + 1 }));
 
     for (const sf::Vector2f &pos: neighbors)
         nb = isCellAlive(pos) ? nb + 1 : nb;

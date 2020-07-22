@@ -37,25 +37,32 @@ Toolbar::~Toolbar(void)
 
 void Toolbar::loadInstructions(void)
 {
+    sf::Vector2f pos = { _bar.getPosition().x + 20, _bar.getPosition().y + 10};
     _font.loadFromFile(FONT);
     _generation = sf::Text(GENERATION_TEXT, _font);
     _generation.setFillColor(sf::Color::Black);
-    _generation.setPosition(sf::Vector2f({ .x = _bar.getPosition().x + 20, .y = _bar.getPosition().y + 10}));
+    _generation.setPosition(pos);
     _generation.setCharacterSize(24);
 
+    pos.x = _bar.getPosition().x + 20;
+    pos.y = _bar.getPosition().y + 40;
     _cells = sf::Text(CELLS_TEXT, _font);
     _cells.setFillColor(sf::Color::Black);
-    _cells.setPosition(sf::Vector2f({ .x = _bar.getPosition().x + 20, .y = _bar.getPosition().y + 40}));
+    _cells.setPosition(pos);
     _cells.setCharacterSize(24);
 
+    pos.x = _bar.getPosition().x + 700;
+    pos.y = _bar.getPosition().y + 10;
     _fileNameText = sf::Text(_fileName, _font);
     _fileNameText.setFillColor(sf::Color::Blue);
-    _fileNameText.setPosition(sf::Vector2f({ .x = _bar.getPosition().x + 700, .y = _bar.getPosition().y + 10}));
+    _fileNameText.setPosition(pos);
     _fileNameText.setCharacterSize(16);
 
+    pos.x = _bar.getPosition().x;
+    pos.y = _bar.getPosition().y - 35;
     _pause = sf::Text(PAUSE_TEXT, _font);
     _pause.setFillColor(sf::Color::Red);
-    _pause.setPosition(sf::Vector2f({ .x = _bar.getPosition().x , .y = _bar.getPosition().y - 35}));
+    _pause.setPosition(pos);
     _pause.setCharacterSize(20);
 }
 
