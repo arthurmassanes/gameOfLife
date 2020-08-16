@@ -7,14 +7,28 @@ Conway's (RIP) Game of Life implemented in C++
 `make`
 
 # Installation & Compilation
+## Linux (Using Makefile)
 ```bash
 git clone https://github.com/arthurmassanes/gameOfLife/
 cd gameOfLife
 make
 ./gameOfLife
 ```
+
+## Other (Using CMake)
+```bash
+git clone https://github.com/arthurmassanes/gameOfLife/
+cd gameOfLife
+mkdir build && cd build
+cmake ..
+make
+mv gameOfLife ..
+cd ..
+./gameOfLife
+```
+
 # Maps
-Maps are ascii text files, with spaces representing dead cells (any character will be interpreted as a cell)
+Maps are ascii text files, with spaces representing dead cells (any other character will be interpreted as a cell)
 
 Pass an empty text file to the game and it will overwrite it on save (*Return*)
 
@@ -26,4 +40,3 @@ Pass an empty text file to the game and it will overwrite it on save (*Return*)
 `./gameOfLife -h` *Displays usage*
 
 ![Screenshot 1](https://raw.githubusercontent.com/arthurmassanes/gameOfLife/master/screenshots/screen1.png)
-
