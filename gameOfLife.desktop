@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Game of Life
+Exec=./gameOfLife
+Icon=icon/game_icon.png
+Terminal=false
